@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Practica de instruire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<a href="#" class="sus-btn"><img src="imagini/icons8-scroll-up-48.png"></a>
+
+<body class="polimorfism-bg">
+
+    <table class="menu">
+        <tr>
+            <td><a href="index.html">Eu</a></td>
+            <td><a href="polimorfism.html">Polimorfism</a></td>
+            <td><a href="exercitii.html">Exerciții</a></td>
+            <td><a href="agenda.html">Agenda</a></td>
+        </tr>
+    </table>
+
+    <table class="ex-box ">
+        <tr>
+            <td>
+                <h2 class="titlu-mare">Polimorfism Dinamic</h2>
+                <p class="subtitlu">Flexibilitate.Structurare.Eficiență</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <nav class="cuprins">
+                    <p class="cuprins-titlu">Cuprins</p>
+                    <ol type="A">
+                        <li><a href="#prezentarea">Prezentarea conceptului teoretic</a></li>
+                        <ul type="circle">
+                            <li><a href="#definitie">Definiții</a></li>
+                            <li><a href="#non">Noțiuni de bază</a></li>
+                            <li><a href="#rol">Rolul și Importanța</a></li>
+                            <li><a href="#caracteristici">Caracteristici</a></li>
+                        </ul>
+                        <li><a href="#explicare">Explicarea modului de utilizare</a></li>
+                        <ul>
+                            <li><a href="#situatii">Situații practice de aplicare</a></li>
+                            <li><a href="#av">Avantaje și Dezavantaje</a></li>                        </ul>
+                        <li><a href="#ex">Exemple Practice</a></li>
+                        <ul>
+                            <li><a href="#fragmente">Fragmente de cod și Explicarea funcțiunării codului</a></li>
+                            <li><a href="#personal">Exemple proprii realizate de mine</a></li>
+                        </ul>
+                        <li><a href="#concluzii">Concluzii</a></li>
+                        <ul>
+                        <li><a href="#observatii">Observații personale</a></li>
+                        <li><a href="#dificultati">Dificultăți întâlnite</a></li>
+                        <li><a href="#importanta">Importanța în Dezvoltarea Aplicațiilor Software</a></li>
+
+                        </ul>
+                    </ol>
+                </nav>
+            </td>
+        </tr>
+        <tr>
+            <td id="prezentarea" class="text3">
+                Prezentarea conceptului teoretic
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <h1 class="text1" id="definitie">Ce este POLIMORFISMUL DINAMIC?!</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="text2">
+                    Din greacă ("multe forme"), reprezintă capacitatea unui
+                    obiect de a fi tratat ca o instanță a clasei sale de
+                    bază, păstrându-şi în acelaşi timp comportamentul
+                    specific.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1 class="text1" id="non">Noțiuni de bază:</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-icon"><img src="imagini/icons8-chain-50.png" alt="lant">
+                        </div>
+                        <h3>Moștenirea</h3>
+                        <p>Creăm o clasă de bază cu proprietățile generale, iar subclasele le moștenesc direct, putând
+                            apoi să vină cu propriile lor completări.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <img src="imagini/icons8-pen-50.png" alt="pix">
+                        </div>
+                        <h3>Suprascrierea</h3>
+                        <p>E momentul în care o clasă derivată își personalizează comportamentul, suprascriind o metodă
+                            virtuală moștenită de la clasa de bază.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><img src="imagini/icons8-scroll-up-50.png" alt="sageata">
+                        </div>
+                        <h3>Upcasting</h3>
+                        <p>Atunci când rulează programul, putem să tratăm un obiect din clasa copil exact ca și cum ar
+                            fi un obiect din clasa părinte, dar el își păstrează comportamentul lui specific.</p>
+                    </div>
+                </div>
+            </td>
+        <tr>
+            <td>
+                <h1 class="text1" id="rol">Rolul și Importanța:</h1>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="imagini/pgb.jpg" alt="poza_verde" class="img-pol">
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <p class="text2">Polimorfismul dinamic e baza unui principiu important în programare:
+                    ne permite să adăugăm funcționalități noi în cod fără să fim nevoiți să spargem sau să modificăm ce
+                    am scris deja și funcționează.
+                    Astfel:</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="text2">
+
+                <ul type="square">
+                    <li>Nu mai legăm clasele strâns: Dacă modifici ceva într-o parte, nu se mai strică totul în restul
+                        programului.</li>
+                    <li>Adăugăm funcții noi fără riscuri: Doar scriem o clasă nouă, fără să atingem sau să strici codul
+                        vechi care deja funcționează.</li>
+                    <li>Reutilizăm codul mult mai bine: O singură funcție generală poate gestiona mai multe tipuri de
+                        obiecte, fără să scriem cod repetitiv.</li>
+                </ul>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1 class="text1" id="caracteristici">Caracteristici principale:</h1>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-icon"><img src="imagini/icons8-copy-50.png" alt="copie">
+                        </div>
+                        <h3>Formatul</h3>
+                        <p>Metoda din clasa-copil trebuie să fie copia a celei din clasa părinte: să aibă exact același
+                            nume,
+                            aceleași argumente și să întoarcă același tip de rezultat.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <img src="imagini/icons8-key-50.png" alt="cheie">
+                        </div>
+                        <h3>Cuvinte Cheie</h3>
+                        <p>în clasa de bază punem <i><b>virtual</b></i> sau <i><b>abstract</b></i>, iar în clasa
+                            derivată folosim obligatoriu <b><i>override</i></b> ca să-i facem rescrierea. (C#)</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><img src="imagini/icons8-handshake-50.png" alt="bond">
+                        </div>
+                        <h3>Ierarhie</h3>
+                        <p>Polimorfismul dinamic nu funcționează singur, are nevoie de o relație de moștenire.
+                            Trebuie să avem o structură clară de tip părinte-copil între clase.</p>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td id="explicare" class="text3">
+                Explicarea modului de utilizare
+            </td>
+        </tr>
+          <tr>
+            <td>
+                <h1 class="text1" id="situatii">Situații Practice de Aplicare:</h1>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-wallet-50 (1).png" alt="">
+  </div>
+  <p> <b>Metode de plată</b> (card, PayPal, crypto) — toate trebuie să execute, dar diferit.</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-metamorphose-50.png" alt="">
+  </div>
+  <p><b> Figuri Geometrice </b> Cerc, dreptunghi, triunghi — toate au arie, dar cu formule diferite.</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-notification-50.png" alt="">
+  </div>
+  <p><b>Sistem de Notificări</b> Email, SMS — trimit un mesaj, dar prin căi diferite.</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-year-of-dog-50.png" alt="">
+  </div>
+  <p><b>Animale</b>  Câine, pisică, pasăre — toate fac sunet, dar fiecare scoate alt sunet.</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-face-id-50.png" alt="">
+  </div>
+  <p><b>Autentificare telefon</b>
+Deblochezi telefonul — cu parolă, amprentă sau Face ID. Telefonul 
+nu știe dinainte ce metodă folosești, dar toate fac același lucru: "verifică identitatea".</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <div class="item-row">
+  <div class="icon-box">
+    <img src="imagini/icons8-navigation-50.png" alt="">
+  </div>
+  <p><b>Aplicație de navigație</b>
+Utilizatorul alege mijlocul de transport — mașină, bicicletă, mers pe jos. Aplicația calculează ruta diferit pentru fiecare, dar interfața e aceeași: "calculează rută".</p>
+</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <h1 class="text1" id="av">Avantaje și Dezavantaje:</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="table-wrapper">
+      <table>
+        <th style="font-size: 20px;">Avantaje</th>
+        <th style="font-size: 20px;">Dezavantaje</th>
+        <tr>
+            <td>
+                Poți adăuga clase noi fără să modifici codul existent.
+            </td>
+            <td>
+                Dacă ai prea multe clase una peste alta, devine greu de urmărit.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Abstracție înaltă — lucrezi cu interfețe, nu cu implementări concrete.
+            </td>
+            <td>
+                Poate fi complicat pentru începători să înțeleagă ce se întâmplă în spate.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Codul este modular — fiecare clasă are responsabilitatea ei clară.
+            </td>
+            <td>
+                Dacă clasa de bază se schimbă, toate clasele derivate pot fi afectate.
+            </td>
+        </tr>
+        <tr>
+            <td>Reduce duplicarea — comportamentul comun e scris o singură dată în clasa de bază.</td>
+        <td>
+            Necesită planificare atentă a ierarhiei de clase de la început.
+        </td>
+        </tr>
+      </table>
+    </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="text3" id="ex">
+                Exemple Practice
+            </td>
+        </tr>
+            <tr>
+            <td>
+            <h1 class="text1" id="fragmente">Fragmente de cod:</h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="text2">
+               Metodă plata:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+
+class Plata {
+    public virtual void Proceseaza() { }
+}
+class Card : Plata {
+    public override void Proceseaza() { Console.WriteLine("Platesc cu cardul"); }
+}
+class PayPal : Plata {
+    public override void Proceseaza() { Console.WriteLine("Platesc cu PayPal"); }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+Clasa Plata definește o metodă generală <b>Proceseaza()</b> marcată cu <b>virtual</b>, pe care clasele <b>Card și PayPal</b> o moștenesc și o suprascriu cu override, fiecare cu propriul mesaj. Când creăm un obiect de tip <b>Card sau PayPal</b> și apelăm <b>Proceseaza()</b> , programul decide singur la rulare ce versiune a metodei să execute, în funcție de tipul real al obiectului.
+ Astfel, putem adăuga oricând o nouă metodă de plată fără să modificăm codul existent.
+    </td>
+</tr>
+<tr>
+            <td class="text2">
+               Figuri geometrice:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+class Figura {
+    public virtual float Arie() { return 0; }
+}
+class Cerc : Figura {
+    float r;
+    public override float Arie() { return 3.14f * r * r; }
+}
+class Dreptunghi : Figura {
+    float l, h;
+    public override float Arie() { return l * h; }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+<b>Clasa</b> <b>Figura</b> definește o metodă generală <b>Arie()</b> marcată cu <b>virtual</b>, pe care clasele <b>Cerc</b> și <b>Dreptunghi</b> o moștenesc și o suprascriu cu <b>override</b>, fiecare folosind propria formulă matematică — <b>3.14 * r * r</b> pentru cerc și <b>l * h</b> pentru dreptunghi.
+<b>Când</b> apelăm <b>Arie()</b> pe un obiect, programul știe automat la rulare ce formulă să aplice în funcție de tipul real al figurii.
+<b>Astfel,</b> putem adăuga oricând figuri noi fără să modificăm codul existent.
+    </td>
+</tr>
+<tr>
+            <td class="text2">
+               Sistem de notificări:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+class Notificare {
+    public virtual void Trimite() { }
+}
+class Email : Notificare {
+    public override void Trimite() { Console.WriteLine("Trimis pe email"); }
+}
+class SMS : Notificare {
+    public override void Trimite() { Console.WriteLine("Trimis prin SMS"); }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+<b>Clasa</b> <b>Notificare</b> definește o metodă generală <b>Trimite()</b> marcată cu <b>virtual</b>, pe care clasele <b>Email</b> și <b>SMS</b> o moștenesc și o suprascriu cu <b>override</b>, fiecare trimițând mesajul prin canalul ei specific.
+
+<br><br>
+
+<b>Când</b> apelăm <b>Trimite()</b> pe un obiect, programul știe automat la rulare ce canal să folosească în funcție de tipul real al notificării.
+
+<br><br>
+
+<b>Astfel,</b> putem adăuga oricând metode noi de notificare, precum Push sau WhatsApp, fără să modificăm codul existent.
+    </td>
+</tr>
+<tr>
+            <td class="text2">
+               Cont Bancar:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+class ContBancar {
+    public string Titular;
+    public double Sold;
+    public virtual void Retrage(double suma) { }
+    public virtual void AplicaDobanada() { }
+}
+class ContCurent : ContBancar {
+    public override void Retrage(double suma) {
+        Sold -= suma;
+        Console.WriteLine($"{Titular} a retras {suma} Lei. Sold ramas: {Sold} Lei");
+    }
+    public override void AplicaDobanada() {
+        Console.WriteLine("Cont curent: fara dobanda");
+    }
+}
+class ContEconomii : ContBancar {
+    public override void Retrage(double suma) {
+        if (suma > Sold * 0.5) {
+            Console.WriteLine("Nu poti retrage mai mult de 50% din economii!");
+        } else {
+            Sold -= suma;
+            Console.WriteLine($"Retras {suma} lei din economii. Sold: {Sold} Lei");
+        }
+    }
+    public override void AplicaDobanada() {
+        double dobanda = Sold * 0.05;
+        Sold += dobanda;
+        Console.WriteLine($"Dobanda 5% aplicata: +{dobanda} Lei. Sold nou: {Sold} Lei");
+    }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+<b>Clasa</b> <b>ContBancar</b> definește metodele generale <b>Retrage()</b> și <b>AplicaDobanda()</b> marcate cu <b>virtual</b>, pe care clasele <b>ContCurent</b> și <b>ContEconomii</b> le moștenesc și le suprascriu cu <b>override</b>, fiecare cu propriile reguli.
+
+<br><br>
+
+<b>ContCurent</b> permite retragerea oricărei sume fără dobândă, pe când <b>ContEconomii</b> blochează retragerea dacă depășește 50% din sold și aplică o dobândă de 5%.
+
+<br><br>
+
+<b>Astfel,</b> același apel <b>Retrage()</b> se comportă diferit în funcție de tipul real al contului, fără să fie nevoie să verificăm manual ce tip de cont avem.
+    </td>
+</tr>
+
+<tr>
+            <td class="text2">
+               Angajați:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+class Angajat {
+    public string Nume;
+    public virtual double CalculeazaSalariu() { return 0; }
+}
+class AngajatSimplu : Angajat {
+    double salaruiBaza = 5000;
+    public override double CalculeazaSalariu() {
+        Console.WriteLine($"{Nume} primeste salariu fix: {salaruiBaza}Lei");
+        return salaruiBaza;
+    }
+}
+class Freelancer : Angajat {
+    int oreLucrate;
+    double tarifOrar = 100;
+    public override double CalculeazaSalariu() {
+        double total = oreLucrate * tarifOrar;
+        Console.WriteLine($"{Nume} a lucrat {oreLucrate}h x {tarifOrar} = {total} Lei");
+        return total;
+    }
+}
+class Consultant : Angajat {
+    double vanzari;
+    public override double CalculeazaSalariu() {
+        double total = vanzari * 0.15;
+        Console.WriteLine($"{Nume} comision 15% din {vanzari} = {total} Lei");
+        return total;
+    }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+<b>Clasa</b> <b>Angajat</b> definește o metodă generală <b>CalculeazaSalariu()</b> marcată cu <b>virtual</b>, pe care clasele <b>AngajatSimplu</b>, <b>Freelancer</b> și <b>Consultant</b> o moștenesc și o suprascriu cu <b>override</b>, fiecare calculând salariul după regula ei.
+
+<br><br>
+
+<b>AngajatSimplu</b> primește mereu același salariu de 5000 Lei, <b>Freelancer</b> este plătit în funcție de orele lucrate înmulțite cu tariful orar, iar <b>Consultant</b> câștigă 15% din vânzările realizate.
+
+<br><br>
+
+<b>Astfel,</b> același apel <b>CalculeazaSalariu()</b> produce rezultate complet diferite în funcție de tipul real al angajatului, fără să verificăm manual ce tip este.
+    </td>
+</tr>
+<tr>
+            <td class="text2">
+               Vehicule:
+            </td>
+            </tr>
+            <tr>
+            <td>
+             <pre class="cod-bloc">
+class Vehicul {
+    public string Model;
+    public virtual double CalculeazaConsum(double km) { return 0; }
+}
+class Masina : Vehicul {
+    public override double CalculeazaConsum(double km) {
+        double consum = km * 0.07;
+        Console.WriteLine($"{Model} consuma {consum}L pentru {km}km");
+        return consum;
+    }
+}
+class ElectricCar : Vehicul {
+    public override double CalculeazaConsum(double km) {
+        double kwh = km * 0.2;
+        Console.WriteLine($"{Model} consuma {kwh}kWh pentru {km}km");
+        return kwh;
+    }
+}
+</pre></td></tr>
+<tr>
+            <td class="text2">
+            <b>Explicație:</b>
+            </td>
+            </tr>
+<tr>
+    <td class="cod-bloc1">
+<b>Clasa</b> <b>Vehicul</b> definește o metodă generală <b>CalculeazaConsum()</b> marcată cu <b>virtual</b>, pe care clasele <b>Masina</b> și <b>ElectricCar</b> o moștenesc și o suprascriu cu <b>override</b>, fiecare calculând consumul după unitatea ei specifică.
+
+<br><br>
+
+<b>Masina</b> calculează consumul în litri de combustibil — 7L la 100km, pe când <b>ElectricCar</b> calculează consumul în kilowați-oră — 0.2 kWh per km.
+
+<br><br>
+
+<b>Astfel,</b> același apel <b>CalculeazaConsum()</b> returnează rezultate diferite în funcție de tipul real al vehiculului, fără să verificăm manual ce tip este.
+    </td>
+</tr>
+ <tr>
+            <td>
+            <h1 class="text1" id="personal">Exemplu personal:</h1>
+            </td>
+        </tr>
+    <tr>
+            <td>
+             <pre class="cod-bloc">
+class Dezastru {
+    public string Locatie;
+    public int NrPersoane;
+    public virtual void Alerteaza() { }
+    public virtual void Evacueaza() { }
+    public virtual int CalculeazaTimp() { return 0; }
+}
+
+class Cutremur : Dezastru {
+    public double Magnitudine;
+    public override void Alerteaza() {
+        Console.WriteLine($"CUTREMUR {Magnitudine} grade la {Locatie}! Iesiti din cladiri!");
+    }
+    public override void Evacueaza() {
+        Console.WriteLine($"Evacuare {NrPersoane} persoane din {Locatie} — adaposturi deschise.");
+    }
+    public override int CalculeazaTimp() {
+        int minute = (int)(Magnitudine * 3);
+        Console.WriteLine($"Timp estimat evacuare: {minute} minute");
+        return minute;
+    }
+}
+
+class Inundatie : Dezastru {
+    public double NivelApa;
+    public override void Alerteaza() {
+        Console.WriteLine($"INUNDATIE la {Locatie}! Nivel apa: {NivelApa}m. Urcati la etaje superioare!");
+    }
+    public override void Evacueaza() {
+        Console.WriteLine($"Evacuare {NrPersoane} persoane cu barci. Zonele joase din {Locatie} blocate.");
+    }
+    public override int CalculeazaTimp() {
+        int minute = (int)(NivelApa * 10 + 20);
+        Console.WriteLine($"Timp estimat evacuare: {minute} minute");
+        return minute;
+    }
+}
+
+class Incendiu : Dezastru {
+    public int EtajAfectat;
+    public override void Alerteaza() {
+        Console.WriteLine($"INCENDIU la etajul {EtajAfectat} in {Locatie}! Sunati 112!");
+    }
+    public override void Evacueaza() {
+        Console.WriteLine($"Evacuare {NrPersoane} persoane pe scari de urgenta. Lifturile blocate in {Locatie}.");
+    }
+    public override int CalculeazaTimp() {
+        int minute = EtajAfectat * 2 + 5;
+        Console.WriteLine($"Timp estimat evacuare: {minute} minute");
+        return minute;
+    }
+}
+</pre></td></tr>
+<tr>
+    <td class="cod-bloc1">
+        <p>
+CUTREMUR 6.5 grade la Chisinau! Iesiti din cladiri!<br>
+Evacuare 3000 persoane din Chisinau — adaposturi deschise.<br>
+Timp estimat evacuare: 19 minute
+<br><br>
+INUNDATIE la Orhei! Nivel apa: 3.5m. Urcati la etaje superioare!<br>
+Evacuare 800 persoane cu barci. Zonele joase din Orhei blocate.<br>
+Timp estimat evacuare: 55 minute
+<br> <br>
+INCENDIU la etajul 7 in Balti! Sunati 112!<br>
+Evacuare 150 persoane pe scari de urgenta. Lifturile blocate in Balti.<br>
+Timp estimat evacuare: 19 minute<br>
+</p>
+    </td>
+</tr>
+          <tr>
+                <td id="concluzii" class="text3">
+                Concluzii
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <h1 class="text1" id="observatii">Observații personale</h1>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="imagini/obs.jpg" alt="poza search" class="img-pol">
+            </td>
+        </tr>
+       <tr>
+    <td>
+        <table class="tabel-meu">
+            <tr>
+                <td>
+                    <p>
+                        Am observat că prin folosirea polimorfismului dinamic dispar acele liste infinite de verificări (if-uri),
+                        iar codul devine mult mai scurt, mai curat și mai ușor de citit.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Codul care dă comanda generală nu trebuie să cunoască detaliile tehnice ale fiecărui obiect în parte;
+                        fiecare componentă își gestionează singură logica internă, fără să le încurce pe celelalte.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Când este nevoie de o funcționalitate nouă în program, aceasta poate fi adăugată sub formă de piesă separată,
+                        fără a modifica sau a risca să stricăm codul care funcționează deja.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Programul nu mai este „bătut în cuie" de la început; el devine capabil să ia decizii corecte în ultima secundă,
+                        în funcție de ce alege sau ce introduce utilizatorul în aplicație.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Acest mecanism ne permite să scriem codul așa cum gândim în viața de zi cu zi — dăm o singură comandă generală,
+                        iar acțiunea se adaptează natural în funcție de obiectul vizat.
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+
+</tr>
+
+<tr>
+    <td>
+        <h1 class="text1" id="dificultati">Dificultăți întâlnite</h1>
+    </td>
+</tr>
+<tr>
+            <td>
+                <img src="imagini/dif.webp" alt="poza search" class="img-pol">
+            </td>
+        </tr>
+<tr>
+    <td>
+        <table class="tabel-meu1">
+            <tr>
+                <td>
+                    <p>
+                        Confuzia dintre suprascriere (override) și supraîncărcare (overload): Tendința greșită de a schimba parametrii din paranteze când, de fapt,
+                        polimorfismul dinamic cere păstrarea exactă a aceleiași semnături a metodei în clasa copil.
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <p>
+                        Rigiditatea semnăturii metodei: O singură literă greșită sau un parametru în plus anulează polimorfismul dinamic;
+                        sistemul nu mai vede suprascrierea (override), ci consideră că ai creat o metodă complet nouă.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Obligația de a redefini constructorii: Deși clasele copii moștenesc metodele, ele nu moștenesc constructorii; este necesar un efort suplimentar pentru a scrie
+                        constructori noi în fiecare copil și pentru a apela manual părintele (prin base).
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+        
+     <tr>
+            <td>
+            <h1 class="text1" id="importanta" style="margin-left: 80px;">Importanța în Dezvoltarea Aplicațiilor Software</h1>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="diagram">
+  <div class="node n1">Arhitectură de tip Plugin: Permite adăugarea de noi funcționalități ca module detașabile, fără ca aplicația de bază să cunoască detaliile lor tehnice.</div>
+<div class="node n6">Abstragerea complexității: Trimite o singură comandă generală (ex: Conecteaza()), lăsând polimorfismul dinamic să execute în spate detaliile tehnice specifice fiecărei tehnologii.</div>
+  <div class="node n2">Respectarea Principiului Open-Closed: Permite extinderea comportamentului aplicației prin clase noi, lăsând codul vechi neatins și protejat de bug-uri.</div>
+  <div class="node n5">Eliminarea Datoriei Tehnice: Șterge verificările repetitive din cod; când apare un obiect nou, nu mai trebuie să modifici zeci de fișiere existente.</div>
+</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <section class="concluzii">
+    <h1>Concluzii Finale</h1>
+    <p>Polimorfismul dinamic transformă programele din secvențe rigide în
+ecosisteme adaptabile. Stăpânirea acestui concept este pasul decisiv de la
+un simplu scriitor de cod la un arhitect software.</p>
+    <div class="carduri">
+      <div class="card">Eficiență Sporită</div>
+      <div class="card">Cod Reutilizabil</div>
+      <div class="card">Design Scalabil</div>
+    </div>
+  </section>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="bibliografie">
+    <h1 class="text1">Bibliografie</h1>
+    <ol class="biblio-list">
+        <li>Inclulet Iulian : Polimorfism — <a href="https://classroom.google.com/c/ODQwMTY4OTM0NTI1/a/ODU4MDk5ODMwNjYz/details" target="_blank">Polimorfism în C#</a></li>
+        <li>YouTube — <a href="https://www.youtube.com" target="_blank">Tutoriale C# OOP</a></li>
+    </ol>
+</div>
+            </td>
+        </tr>
+      </table>
+            </td>
+        </tr>
+    </table>
+     <footer>
+        <p>@2026 Gabriela Carpovici. Toate drepturile rezervate.</p>
+    </footer>
+</body>
+
+</html>

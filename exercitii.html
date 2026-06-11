@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Practica de instruire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="ex-bg">
+
+    <a href="#" class="sus-btn"><img src="imagini/icons8-scroll-up-48.png"></a>
+
+    <table class="menu">
+        <tr>
+            <td><a href="index.html">Eu</a></td>
+            <td><a href="polimorfism.html">Polimorfism</a></td>
+            <td><a href="exercitii.html">Exerciții</a></td>
+            <td><a href="agenda.html">Agenda</a></td>
+        </tr>
+    </table>
+
+    <div class="ex-box">
+
+        <h1 class="titlu-mare2">Sarcini pentru Practică</h1>
+
+        <nav class="cuprins">
+            <p class="cuprins-titlu">Cuprins</p>
+            <ol type="A">
+                <li><a href="#poo">Programare Orientată pe Obiecte</a></li>
+                <ul type="circle">
+                    <li><a href="#prob2">PROBLEMA 2</a></li>
+                    <li><a href="#prob17">PROBLEMA 17</a></li>
+                </ul>
+                <li><a href="#tehnici">Tehnici de Programare</a></li>
+                <ul type="circle">
+                    <li><a href="#m1">PROBLEMA M1.8</a></li>
+                    <li><a href="#m2">PROBLEMA M2.5</a></li>
+                    <li><a href="#m3">PROBLEMA M3.5</a></li>
+                    <li><a href="#m4">PROBLEMA M3.35</a></li>
+                    <li><a href="#m5">PROBLEMA M4.5</a></li>
+                    <li><a href="#m6">PROBLEMA M5.21</a></li>
+                    <li><a href="#m7">PROBLEMA M6.5</a></li>
+                    <li><a href="#m8">PROBLEMA M6.22</a></li>
+                </ul>
+                <li><a href="#individual">Problema identificată individual</a></li>
+            </ol>
+        </nav>
+
+        <h1 class="titlu-mare2" id="poo">POO</h1>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="prob2">Problema 2 "Agentie de turism":</b>
+In cadrul unei agentii de turism, se cunosc urmatoarele informatii despre statiunile in care se ofera sejururi:
+nume statiune;
+perioada de sejur, specificata prin data de inceput si sfarsit a sejurului;
+Informatiile despre clienti sunt urmatoarele:
+1. nume si prenume;
+2. numar si serie carte de identitate;
+3. adresa;
+4. numar de telefon;
+5. perioada de sejur dorita;
+6. statiunea dorita;
+Operatii care trebuie efectuate sunt:
+1. introducere date;
+2. afisare statiuni sortate dupa nume;
+3. adaugare a unei noi statiuni cu perioadele aferente la data curenta;
+4. adaugare a unei noi perioade la o statiune;
+5. afisare statiuni care au bilete intr-o anumita perioada sortate dupa nume (lista);
+6. afisare perioade sejur pentru o anumita statiune sortate dupa ziua de incepere a perioadelor;
+7. afisare clienti care doresc aceeasi perioada intr-o statiune;
+8. afisare clienti care doresc o statiune;
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="prob1">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+using System.Collections.Generic;
+
+class Statiune
+{
+    public string Nume;
+    public List&lt;Perioada&gt; Perioade = new List&lt;Perioada&gt;();
+
+    public Statiune(string nume)
+    {
+        Nume = nume;
+    }
+}
+
+class Perioada
+{
+    public DateTime DataInceput;
+    public DateTime DataSfarsit;
+
+    public Perioada(DateTime inceput, DateTime sfarsit)
+    {
+        DataInceput = inceput;
+        DataSfarsit = sfarsit;
+    }
+
+    public override string ToString()
+    {
+        return DataInceput.ToString("dd/MM/yyyy") + " - " + DataSfarsit.ToString("dd/MM/yyyy");
+    }
+}
+
+class Client
+{
+    public string Nume;
+    public string Prenume;
+    public string NumarCI;
+    public string SerieCI;
+    public string Adresa;
+    public string Telefon;
+    public Perioada PerioadaDorita;
+    public string StatiuneDorita;
+}
+
+class Program
+{
+    static List&lt;Statiune&gt; statiuni = new List&lt;Statiune&gt;();
+    static List&lt;Client&gt; clienti = new List&lt;Client&gt;();
+
+    static DateTime CitesteData(string mesaj)
+    {
+        Console.Write(mesaj);
+
+        string text = Console.ReadLine();
+        string[] v = text.Split('.');
+
+        int zi = int.Parse(v[0]);
+        int luna = int.Parse(v[1]);
+        int an = int.Parse(v[2]);
+
+        return new DateTime(an, luna, zi);
+    }
+
+    static void Main()
+    {
+        int optiune;
+
+        do
+        {
+            Console.WriteLine("1. Introducere date");
+            Console.WriteLine("2. Afisare statiuni sortate dupa nume");
+            Console.WriteLine("3. Adaugare statiune noua cu perioade la data curenta");
+            Console.WriteLine("4. Adaugare perioada la o statiune");
+            Console.WriteLine("5. Afisare statiuni cu bilete intr-o perioada");
+            Console.WriteLine("6. Afisare perioade sejur pentru o statiune");
+            Console.WriteLine("7. Afisare clienti cu aceeasi perioada intr-o statiune");
+            Console.WriteLine("8. Afisare clienti care doresc o statiune");
+            Console.WriteLine("0. Iesire");
+            Console.Write("Optiune: ");
+
+            optiune = int.Parse(Console.ReadLine());
+
+            if (optiune == 1) IntroducereDate();
+            else if (optiune == 2) AfisareStatiuniSortate();
+            else if (optiune == 3) AdaugareStatiuneNoua();
+            else if (optiune == 4) AdaugarePerioadaLaStatiune();
+            else if (optiune == 5) AfisareStatiuniCuBilete();
+            else if (optiune == 6) AfisarePerioadeStatiune();
+            else if (optiune == 7) AfisareClientiAceeasiPerioada();
+            else if (optiune == 8) AfisareClientiStatiune();
+            else if (optiune == 0) Console.WriteLine("La revedere!");
+            else Console.WriteLine("Optiune invalida!");
+
+        } while (optiune != 0);
+    }
+
+    static void IntroducereDate()
+    {
+        Console.Write("Nume statiune: ");
+        string numeStatiune = Console.ReadLine();
+
+        Statiune s = new Statiune(numeStatiune);
+
+        Console.Write("Cate perioade adaugi? ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i &lt; n; i++)
+        {
+            DateTime inceput = CitesteData("Data inceput perioada " + (i + 1) + ": ");
+            DateTime sfarsit = CitesteData("Data sfarsit perioada " + (i + 1) + ": ");
+
+            s.Perioade.Add(new Perioada(inceput, sfarsit));
+        }
+
+        statiuni.Add(s);
+        Console.WriteLine("Statiune adaugata!");
+
+        Console.Write("\nAdaugi un client? (da/nu): ");
+        string raspuns = Console.ReadLine();
+
+        if (raspuns == "da")
+        {
+            Client c = new Client();
+
+            Console.Write("Nume: ");
+            c.Nume = Console.ReadLine();
+
+            Console.Write("Prenume: ");
+            c.Prenume = Console.ReadLine();
+
+            Console.Write("Serie CI: ");
+            c.SerieCI = Console.ReadLine();
+
+            Console.Write("Numar CI: ");
+            c.NumarCI = Console.ReadLine();
+
+            Console.Write("Adresa: ");
+            c.Adresa = Console.ReadLine();
+
+            Console.Write("Telefon: ");
+            c.Telefon = Console.ReadLine();
+
+            Console.Write("Statiune dorita: ");
+            c.StatiuneDorita = Console.ReadLine();
+
+            DateTime inc = CitesteData("Data inceput sejur dorit: ");
+            DateTime sf = CitesteData("Data sfarsit sejur dorit: ");
+
+            c.PerioadaDorita = new Perioada(inc, sf);
+
+            clienti.Add(c);
+            Console.WriteLine("Client adaugat!");
+        }
+    }
+
+    static void AfisareStatiuniSortate()
+    {
+        for (int i = 0; i &lt; statiuni.Count - 1; i++)
+        {
+            for (int j = i + 1; j &lt; statiuni.Count; j++)
+            {
+                if (string.Compare(statiuni[i].Nume, statiuni[j].Nume) &gt; 0)
+                {
+                    Statiune temp = statiuni[i];
+                    statiuni[i] = statiuni[j];
+                    statiuni[j] = temp;
+                }
+            }
+        }
+
+        Console.WriteLine("\n--- Statiuni sortate dupa nume ---");
+
+        for (int i = 0; i &lt; statiuni.Count; i++)
+        {
+            Console.WriteLine("- " + statiuni[i].Nume + " (" + statiuni[i].Perioade.Count + " perioade)");
+        }
+    }
+
+    static void AdaugareStatiuneNoua()
+    {
+        Console.Write("Nume statiune noua: ");
+        string nume = Console.ReadLine();
+
+        Statiune s = new Statiune(nume);
+        s.Perioade.Add(new Perioada(DateTime.Today, DateTime.Today.AddDays(7)));
+
+        statiuni.Add(s);
+
+        Console.WriteLine("Statiune adaugata cu perioada de la data curenta: " + DateTime.Today.ToString("dd/MM/yyyy"));
+    }
+
+    static void AdaugarePerioadaLaStatiune()
+    {
+        Console.Write("Nume statiune: ");
+        string nume = Console.ReadLine();
+
+        Statiune gasita = null;
+
+        for (int i = 0; i &lt; statiuni.Count; i++)
+        {
+            if (statiuni[i].Nume.ToLower() == nume.ToLower())
+            {
+                gasita = statiuni[i];
+                break;
+            }
+        }
+
+        if (gasita == null)
+        {
+            Console.WriteLine("Statiunea nu a fost gasita.");
+            return;
+        }
+
+        DateTime inceput = CitesteData("Data inceput: ");
+        DateTime sfarsit = CitesteData("Data sfarsit: ");
+
+        gasita.Perioade.Add(new Perioada(inceput, sfarsit));
+
+        Console.WriteLine("Perioada adaugata!");
+    }
+
+    static void AfisareStatiuniCuBilete()
+    {
+        DateTime inceput = CitesteData("Data inceput cautare: ");
+        DateTime sfarsit = CitesteData("Data sfarsit cautare: ");
+
+        Console.WriteLine("\n--- Statiuni cu bilete in perioada specificata ---");
+
+        for (int i = 0; i &lt; statiuni.Count; i++)
+        {
+            for (int j = 0; j &lt; statiuni[i].Perioade.Count; j++)
+            {
+                if (statiuni[i].Perioade[j].DataInceput &lt;= sfarsit &&
+                    statiuni[i].Perioade[j].DataSfarsit &gt;= inceput)
+                {
+                    Console.WriteLine("- " + statiuni[i].Nume);
+                    break;
+                }
+            }
+        }
+    }
+
+    static void AfisarePerioadeStatiune()
+    {
+        Console.Write("Nume statiune: ");
+        string nume = Console.ReadLine();
+
+        Statiune gasita = null;
+
+        for (int i = 0; i &lt; statiuni.Count; i++)
+        {
+            if (statiuni[i].Nume.ToLower() == nume.ToLower())
+            {
+                gasita = statiuni[i];
+                break;
+            }
+        }
+
+        if (gasita == null)
+        {
+            Console.WriteLine("Statiunea nu a fost gasita.");
+            return;
+        }
+
+        for (int i = 0; i &lt; gasita.Perioade.Count - 1; i++)
+        {
+            for (int j = i + 1; j &lt; gasita.Perioade.Count; j++)
+            {
+                if (gasita.Perioade[i].DataInceput &gt; gasita.Perioade[j].DataInceput)
+                {
+                    Perioada temp = gasita.Perioade[i];
+                    gasita.Perioade[i] = gasita.Perioade[j];
+                    gasita.Perioade[j] = temp;
+                }
+            }
+        }
+
+        Console.WriteLine("\n--- Perioade pentru " + gasita.Nume + " ---");
+
+        for (int i = 0; i &lt; gasita.Perioade.Count; i++)
+        {
+            Console.WriteLine("  " + gasita.Perioade[i]);
+        }
+    }
+
+    static void AfisareClientiAceeasiPerioada()
+    {
+        Console.Write("Statiune: ");
+        string statiune = Console.ReadLine();
+
+        DateTime inceput = CitesteData("Data inceput: ");
+        DateTime sfarsit = CitesteData("Data sfarsit: ");
+
+        Console.WriteLine("\n--- Clienti cu aceeasi perioada ---");
+
+        for (int i = 0; i &lt; clienti.Count; i++)
+        {
+            if (clienti[i].StatiuneDorita.ToLower() == statiune.ToLower() &&
+                clienti[i].PerioadaDorita.DataInceput == inceput &&
+                clienti[i].PerioadaDorita.DataSfarsit == sfarsit)
+            {
+                Console.WriteLine("- " + clienti[i].Nume + " " + clienti[i].Prenume + ", Tel: " + clienti[i].Telefon);
+            }
+        }
+    }
+
+    static void AfisareClientiStatiune()
+    {
+        Console.Write("Nume statiune: ");
+        string statiune = Console.ReadLine();
+
+        Console.WriteLine("\n--- Clienti care doresc statiunea " + statiune + " ---");
+
+        for (int i = 0; i &lt; clienti.Count; i++)
+        {
+            if (clienti[i].StatiuneDorita.ToLower() == statiune.ToLower())
+            {
+                Console.WriteLine("- " + clienti[i].Nume + " " + clienti[i].Prenume +
+                    ", Tel: " + clienti[i].Telefon +
+                    ", Perioada: " + clienti[i].PerioadaDorita);
+            }
+        }
+    }
+}
+            </pre>
+        </div>
+
+       <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/1.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/2.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/3.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/4.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/5.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/6.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/7.jpg" alt="consola">
+
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="prob17">Problema 17 "Firma de protectie si paza":</b>
+In cadrul unei agentii de protectie si paza, se cunosc urmatoarele informatii despre locatiile,
+respective persoanele pentru care se ofera servicii de paza si protectie: nume societate; adresa competa;
+persoanele cu parola si cod pentru operatiile de armare/dezarmare; tipul de contract; distanta pana la cea mai
+apropiata celula; istoricul interventiilor la respectiva adresa.
+Informatiile despre clienti sunt urmatoarele:
+1. nume si prenume;
+2. numar si serie carte de identitate;
+3. adresa;
+4. numar de telefon;
+5. functia in cadrul societatii;
+Operatii cerute sunt:
+1. introducere date;
+2. afisare locatiilor sortate dupa nume;
+3. adaugare a unei noi locatii impreuna cu toate datele aferente persoanelor care utilizeaza noua locatie;
+4. afisare locatiilor care au sediul intr-un anumit perimetru (de exemplu toate locatiile din cartierul 1 Mai);
+5. afisare persoanelor care au avut acces, in timp, la datele corespunzatoare unei locatii;
+6. simularea unei actiuni la o locatie specificata cu determinarea timpilor de reactie;
+7. simularea unei actiuni la fiecare din locatiile protejate cu determinarea timpilor de reactie;
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+using System.Collections.Generic;
+
+class Persoana
+{
+    public string Nume;
+    public string Prenume;
+    public string SerieCI;
+    public string Adresa;
+    public string Telefon;
+    public string Functie;
+    public string Parola;
+    public string Cod;
+}
+
+class Interventie
+{
+    public string Data;
+    public string Descriere;
+}
+
+class Locatie
+{
+    public string NumeSocietate;
+    public string Adresa;
+    public string TipContract;
+    public double DistantaCelula;
+    public List&lt;Persoana&gt; Persoane;
+    public List&lt;Interventie&gt; Istoric;
+
+    public Locatie(string nume, string adresa, string tipContract, double distanta)
+    {
+        NumeSocietate = nume;
+        Adresa = adresa;
+        TipContract = tipContract;
+        DistantaCelula = distanta;
+        Persoane = new List&lt;Persoana&gt;();
+        Istoric = new List&lt;Interventie&gt;();
+    }
+}
+
+class Program
+{
+    static List&lt;Locatie&gt; locatii = new List&lt;Locatie&gt;();
+
+    static void Main()
+    {
+        int optiune;
+        do
+        {
+            Console.WriteLine("1. Introducere date");
+            Console.WriteLine("2. Afisare locatii sortate dupa nume");
+            Console.WriteLine("3. Adaugare locatie noua cu persoane");
+            Console.WriteLine("4. Afisare locatii dintr-un perimetru");
+            Console.WriteLine("5. Afisare persoane cu acces la o locatie");
+            Console.WriteLine("6. Simulare actiune la o locatie");
+            Console.WriteLine("7. Simulare actiune la toate locatiile");
+            Console.WriteLine("0. Iesire");
+            Console.Write("Optiunea dvs: ");
+            optiune = int.Parse(Console.ReadLine());
+
+            if (optiune == 1) IntroducereDate();
+            else if (optiune == 2) AfisareLocatiiSortate();
+            else if (optiune == 3) AdaugareLocatieNoua();
+            else if (optiune == 4) AfisareLocatiiPerimetru();
+            else if (optiune == 5) AfisarePersoaneAcces();
+            else if (optiune == 6) SimulareActiuneLocatie();
+            else if (optiune == 7) SimulareActiuneToate();
+
+        } while (optiune != 0);
+    }
+
+    static void IntroducereDate()
+    {
+        Console.WriteLine("1. Adauga locatie");
+        Console.WriteLine("2. Adauga persoana la o locatie");
+        Console.WriteLine("3. Adauga interventie la o locatie");
+        Console.Write("Alegeti: ");
+        int opt = int.Parse(Console.ReadLine());
+
+        if (opt == 1)
+        {
+            Console.Write("Nume societate: "); string nume = Console.ReadLine();
+            Console.Write("Adresa: "); string adresa = Console.ReadLine();
+            Console.Write("Tip contract: "); string tipContract = Console.ReadLine();
+            Console.Write("Distanta pana la cea mai apropiata celula (km): ");
+            double distanta = double.Parse(Console.ReadLine());
+            Locatie l = new Locatie(nume, adresa, tipContract, distanta);
+            Console.Write("Cate persoane adaugati? ");
+            int nr = int.Parse(Console.ReadLine());
+            for (int i = 0; i &lt; nr; i++) l.Persoane.Add(CitirePersoana());
+            locatii.Add(l);
+            Console.WriteLine("Locatie adaugata!");
+        }
+        else if (opt == 2)
+        {
+            Console.Write("Numele societatii: ");
+            string nume = Console.ReadLine();
+            Locatie gasita = GasesteLocatie(nume);
+            if (gasita == null) { Console.WriteLine("Locatia nu exista!"); return; }
+            gasita.Persoane.Add(CitirePersoana());
+            Console.WriteLine("Persoana adaugata!");
+        }
+        else if (opt == 3)
+        {
+            Console.Write("Numele societatii: ");
+            string nume = Console.ReadLine();
+            Locatie gasita = GasesteLocatie(nume);
+            if (gasita == null) { Console.WriteLine("Locatia nu exista!"); return; }
+            Interventie inv = new Interventie();
+            Console.Write("Data interventiei: "); inv.Data = Console.ReadLine();
+            Console.Write("Descriere: "); inv.Descriere = Console.ReadLine();
+            gasita.Istoric.Add(inv);
+            Console.WriteLine("Interventie adaugata!");
+        }
+    }
+
+    static Persoana CitirePersoana()
+    {
+        Persoana p = new Persoana();
+        Console.Write("Nume: "); p.Nume = Console.ReadLine();
+        Console.Write("Prenume: "); p.Prenume = Console.ReadLine();
+        Console.Write("Serie si numar CI: "); p.SerieCI = Console.ReadLine();
+        Console.Write("Adresa: "); p.Adresa = Console.ReadLine();
+        Console.Write("Telefon: "); p.Telefon = Console.ReadLine();
+        Console.Write("Functia: "); p.Functie = Console.ReadLine();
+        Console.Write("Parola: "); p.Parola = Console.ReadLine();
+        Console.Write("Cod armare/dezarmare: "); p.Cod = Console.ReadLine();
+        return p;
+    }
+
+    static Locatie GasesteLocatie(string nume)
+    {
+        for (int i = 0; i &lt; locatii.Count; i++)
+            if (locatii[i].NumeSocietate == nume) return locatii[i];
+        return null;
+    }
+
+    static void AfisareLocatiiSortate()
+    {
+        if (locatii.Count == 0) { Console.WriteLine("Nu exista locatii!"); return; }
+
+        for (int i = 0; i &lt; locatii.Count - 1; i++)
+            for (int j = 0; j &lt; locatii.Count - i - 1; j++)
+                if (string.Compare(locatii[j].NumeSocietate, locatii[j + 1].NumeSocietate) &gt; 0)
+                {
+                    Locatie temp = locatii[j];
+                    locatii[j] = locatii[j + 1];
+                    locatii[j + 1] = temp;
+                }
+
+        Console.WriteLine("\nLocatii:");
+        for (int i = 0; i &lt; locatii.Count; i++)
+            Console.WriteLine((i + 1) + ". " + locatii[i].NumeSocietate + " | " + locatii[i].Adresa + " | " + locatii[i].TipContract);
+    }
+
+    static void AdaugareLocatieNoua()
+    {
+        Console.Write("Nume societate: "); string nume = Console.ReadLine();
+        Console.Write("Adresa: "); string adresa = Console.ReadLine();
+        Console.Write("Tip contract: "); string tipContract = Console.ReadLine();
+        Console.Write("Distanta pana la cea mai apropiata celula (km): ");
+        double distanta = double.Parse(Console.ReadLine());
+
+        Locatie l = new Locatie(nume, adresa, tipContract, distanta);
+
+        Console.Write("Cate persoane adaugati? ");
+        int nr = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i &lt; nr; i++) l.Persoane.Add(CitirePersoana());
+
+        locatii.Add(l);
+        Console.WriteLine("Locatie adaugata!");
+    }
+
+    static void AfisareLocatiiPerimetru()
+    {
+        Console.Write("Introduceti perimetrul cautat: ");
+        string perimetru = Console.ReadLine();
+
+        bool gasit = false;
+
+        Console.WriteLine("\nLocatii in perimetrul '" + perimetru + "':");
+
+        for (int i = 0; i &lt; locatii.Count; i++)
+            if (locatii[i].Adresa.IndexOf(perimetru, StringComparison.OrdinalIgnoreCase) &gt;= 0)
+            {
+                Console.WriteLine("- " + locatii[i].NumeSocietate + " | " + locatii[i].Adresa);
+                gasit = true;
+            }
+
+        if (!gasit) Console.WriteLine("Nu exista locatii in acest perimetru!");
+    }
+
+    static void AfisarePersoaneAcces()
+    {
+        Console.Write("Numele societatii: ");
+        string nume = Console.ReadLine();
+
+        Locatie gasita = GasesteLocatie(nume);
+
+        if (gasita == null) { Console.WriteLine("Locatia nu exista!"); return; }
+        if (gasita.Persoane.Count == 0) { Console.WriteLine("Nu exista persoane inregistrate!"); return; }
+
+        Console.WriteLine("\nPersoane cu acces la " + gasita.NumeSocietate + ":");
+
+        for (int i = 0; i &lt; gasita.Persoane.Count; i++)
+            Console.WriteLine((i + 1) + ". " + gasita.Persoane[i].Nume + " " + gasita.Persoane[i].Prenume +
+                " | CI: " + gasita.Persoane[i].SerieCI +
+                " | Functie: " + gasita.Persoane[i].Functie +
+                " | Tel: " + gasita.Persoane[i].Telefon);
+
+        if (gasita.Istoric.Count &gt; 0)
+        {
+            Console.WriteLine("\nIstoricul interventiilor:");
+
+            for (int i = 0; i &lt; gasita.Istoric.Count; i++)
+                Console.WriteLine("- " + gasita.Istoric[i].Data + ": " + gasita.Istoric[i].Descriere);
+        }
+    }
+
+    static void SimulareActiuneLocatie()
+    {
+        Console.Write("Numele societatii: ");
+        string nume = Console.ReadLine();
+
+        Locatie gasita = GasesteLocatie(nume);
+
+        if (gasita == null) { Console.WriteLine("Locatia nu exista!"); return; }
+
+        Console.Write("Viteza medie de deplasare a echipei (km/h): ");
+        double viteza = double.Parse(Console.ReadLine());
+
+        double timpMinute = (gasita.DistantaCelula / viteza) * 60;
+
+        Console.WriteLine("\nSimulare actiune pentru: " + gasita.NumeSocietate);
+        Console.WriteLine("Adresa: " + gasita.Adresa);
+        Console.WriteLine("Distanta pana la celula: " + gasita.DistantaCelula + " km");
+        Console.WriteLine("Timp de reactie estimat: " + Math.Round(timpMinute, 2) + " minute");
+
+        Interventie inv = new Interventie();
+        inv.Data = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        inv.Descriere = "Simulare actiune - timp reactie: " + Math.Round(timpMinute, 2) + " minute";
+
+        gasita.Istoric.Add(inv);
+    }
+
+    static void SimulareActiuneToate()
+    {
+        if (locatii.Count == 0) { Console.WriteLine("Nu exista locatii!"); return; }
+
+        Console.Write("Viteza medie de deplasare a echipei (km/h): ");
+        double viteza = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("\nSimulare actiune pentru toate locatiile:");
+
+        for (int i = 0; i &lt; locatii.Count; i++)
+        {
+            double timpMinute = (locatii[i].DistantaCelula / viteza) * 60;
+
+            Console.WriteLine((i + 1) + ". " + locatii[i].NumeSocietate +
+                " | Distanta: " + locatii[i].DistantaCelula + " km" +
+                " | Timp reactie: " + Math.Round(timpMinute, 2) + " minute");
+
+            Interventie inv = new Interventie();
+            inv.Data = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            inv.Descriere = "Simulare actiune - timp reactie: " + Math.Round(timpMinute, 2) + " minute";
+
+            locatii[i].Istoric.Add(inv);
+        }
+    }
+}
+</pre>
+        </div>
+
+         <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/8.jpg" alt="consola">
+             <img style="width: 600px; padding-left: 150px;" src="imagini/9.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/10.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/11.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/12.jpg" alt="consola">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/13.jpg" alt="consola">
+
+        </div>
+
+        <h1 class="titlu-mare2" id="tehnici">Tehnici De Programare</h1>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m1">Problema M1.8 :</b>
+Într-o pușculiță se află N monede de diferite valori cu greutatea totală G grame. Greutatea fiecărei
+monede de o anumită valoare este dată în tabelul ce urmează.
+<img src="imagini/tabelm1.jpg" alt="tabel_poza" style="padding-top: 20px;">
+Elaborați un program care determină suma minimă S care ar putea să fie în pușculiță.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Introduceti numarul de monede: ");
+        int n = int.Parse(Console.ReadLine());
+
+        Console.Write("Introduceti greutatea totala: ");
+        int g = int.Parse(Console.ReadLine());
+
+        if (g &lt; n || g &gt; 5 * n)
+        {
+            Console.WriteLine("Date invalide!");
+            return;
+        }
+
+        int d = g - n;
+        long s = n;
+        while (d &gt; 0)
+        {
+            if (d &gt;= 4) { s += 49; d -= 4; }
+            else if (d == 3) { s += 24; d -= 3; }
+            else if (d == 2) { s += 9; d -= 2; }
+            else { s += 4; d--; }
+        }
+        Console.WriteLine("Suma minima S = " + s + " lei");
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image5.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m2">Problema M2.5 :</b>
+La un concurs de automobilism de la linia de start până la final sunt plasate n stații de benzină
+(la diferite distanțe). Având rezervorul plin, mașina unui concurent poate parcurge cel mult o distanță d
+(în kilometri). Concurentul dorește să se oprească de cât mai puține ori și desigur să parcurgă întreg
+drumul de la punctul de start la cel final. Descrieți o metodă eficientă pe care trebuie să o aplice
+concurentul și arătați că strategia respectivă conduce la o soluție optimă.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n, d, L;
+
+        Console.Write("Numarul statiilor: ");
+        n = int.Parse(Console.ReadLine());
+
+        Console.Write("Distanta maxima parcursa cu un rezervor: ");
+        d = int.Parse(Console.ReadLine());
+
+        Console.Write("Lungimea traseului: ");
+        L = int.Parse(Console.ReadLine());
+
+        int[] s = new int[n + 2];
+        s[0] = 0;
+
+        for (int i = 1; i &lt;= n; i++)
+        {
+            Console.Write("Statia " + i + ": ");
+            s[i] = int.Parse(Console.ReadLine());
+        }
+
+        s[n + 1] = L;
+
+        int p = 0;
+        int opriri = 0;
+
+        while (p &lt; n + 1)
+        {
+            int u = p;
+            for (int i = p + 1; i &lt;= n + 1; i++)
+            {
+                if (s[i] - s[p] &lt;= d) u = i;
+                else break;
+            }
+
+            if (u == p) { Console.WriteLine("Nu se poate ajunge la destinatie."); return; }
+            if (u != n + 1) opriri++;
+            p = u;
+        }
+
+        Console.WriteLine("Numarul minim de opriri este: " + opriri);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image5.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m3">Problema M3.5 :</b>
+La o masă rotundă se așază n persoane. Fiecare persoană reprezintă o firmă. Se dau k perechi
+de persoane care aparțin unor firme concurente. Se cere să se determine toate modalitățile de așezare la
+masă a persoanelor astfel încât să nu stea alături două persoane de la firme concurente.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static int n, k;
+    static int[,] c = new int[20, 20];
+    static int[] x = new int[20];
+    static int[] folosit = new int[20];
+
+    static void Afisare()
+    {
+        for (int i = 1; i &lt;= n; i++) Console.Write(x[i] + " ");
+        Console.WriteLine();
+    }
+
+    static void Back(int p)
+    {
+        if (p == n + 1)
+        {
+            if (c[x[n], x[1]] == 0) Afisare();
+        }
+        else
+        {
+            for (int i = 1; i &lt;= n; i++)
+            {
+                if (folosit[i] == 0)
+                {
+                    if (p == 1 || c[x[p - 1], i] == 0)
+                    {
+                        x[p] = i;
+                        folosit[i] = 1;
+                        Back(p + 1);
+                        folosit[i] = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    static void Main()
+    {
+        Console.Write("n = "); n = int.Parse(Console.ReadLine());
+        Console.Write("k = "); k = int.Parse(Console.ReadLine());
+
+        for (int i = 1; i &lt;= k; i++)
+        {
+            int a, b;
+            Console.Write("Persoana 1 = "); a = int.Parse(Console.ReadLine());
+            Console.Write("Persoana 2 = "); b = int.Parse(Console.ReadLine());
+            c[a, b] = 1; c[b, a] = 1;
+        }
+
+        Console.WriteLine("Modalitatile de asezare sunt:");
+        Back(1);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image3.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m4">Problema M3.35 :</b>
+Se citește un număr natural n. Să se afișeze toate modurile în care poate fi descompus ca produs
+de numere naturale diferite de 1 și n.
+<img src="imagini/m4.jpg" alt="tabel" style="padding-top:20px;">
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static int nr;
+    static int[] fact = new int[100];
+
+    static void Descomp(int ram, int poz, int minF)
+    {
+        if (ram == 1)
+        {
+            if (poz &gt; 1)
+            {
+                for (int af = 0; af &lt; poz; af++)
+                {
+                    if (af &gt; 0) Console.Write("*");
+                    Console.Write(fact[af]);
+                }
+                Console.WriteLine();
+            }
+        }
+        else
+        {
+            for (int f = minF; f &lt;= ram; f++)
+                if (ram % f == 0) { fact[poz] = f; Descomp(ram / f, poz + 1, f); }
+        }
+    }
+
+    static void Main()
+    {
+        Console.Write("nr = ");
+        nr = int.Parse(Console.ReadLine());
+        Descomp(nr, 0, 2);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image1.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m5">Problema M4.5 :</b>
+Generarea permutărilor. Fie dat numărul natural n. Să se genereze toate permutările din n
+elemente a mulțimii A={1,2,3,... .. . ,n}.
+Indicație: Se numesc permutări ale unei mulțimi A cu n elemente toate mulțimile ordonate care se pot
+forma cu cele n elemente ale lui A. Pentru n ∈ N*, avem Pn = 1*2*3*...*n=n!
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static int nr;
+    static int[] perm = new int[20];
+    static int[] fol = new int[20];
+
+    static void Back(int poz)
+    {
+        if (poz &gt; nr)
+        {
+            for (int i = 1; i &lt;= nr; i++) Console.Write(perm[i] + " ");
+            Console.WriteLine();
+        }
+        else
+        {
+            for (int val = 1; val &lt;= nr; val++)
+            {
+                if (fol[val] == 0)
+                {
+                    perm[poz] = val;
+                    fol[val] = 1;
+                    Back(poz + 1);
+                    fol[val] = 0;
+                }
+            }
+        }
+    }
+
+    static void Main()
+    {
+        Console.Write("nr = ");
+        nr = int.Parse(Console.ReadLine());
+        Back(1);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image2.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Problema M5.21 :</b>
+Se dă un șir neordonat S cu n - 1 numere distincte, selectate dintre cele n numere de la 0 la n -
+1. Toate sunt numere întregi, reprezentate pe 32 de biți. Folosind metoda getBit(int i, int j) care
+întoarce al j-lea bit din reprezentarea binară a lui S[i], determinați numărul lipsă.
+Exemplu:
+
+a) pentru șirul {0 1 9 4 5 7 6 8 2} lipsește numărul 3
+b) getBit(7,3) întoarce al treilea bit din S[7]. S[7] este 8, în binar: 1000, deci bit-ul 3 este 1.
+c) La un prim pas, se observă că bitul 3 este 0 pentru doar 7 numere din șir, deși între 0 și 9 sunt 8 numere
+care ar trebui să aibă bitul 3 egal cu 0, respectiv numerele de la 0 la 7. Prin urmare, la primul pas ne dăm
+seama că numărul căutat este între 0 și 7.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+class Program
+{
+    static int[] sir = new int[100];
+
+    static int getBit(int i, int j)
+    {
+        return (sir[i] &gt;&gt; j) &amp; 1;
+    }
+
+    static void Main()
+    {
+        int n;
+        Console.Write("n = ");
+        n = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Introdu " + (n - 1) + " numere:");
+        for (int i = 0; i &lt; n - 1; i++)
+            sir[i] = int.Parse(Console.ReadLine());
+
+        int lipsa = 0;
+        for (int bit = 0; bit &lt; 32; bit++)
+        {
+            int zeroSir = 0, zeroTotal = 0;
+            for (int i = 0; i &lt; n - 1; i++)
+                if (getBit(i, bit) == 0) zeroSir++;
+            for (int x = 0; x &lt; n; x++)
+                if (((x &gt;&gt; bit) &amp; 1) == 0) zeroTotal++;
+            if (zeroSir &lt; zeroTotal) lipsa = lipsa + (0 &lt;&lt; bit);
+            else lipsa = lipsa + (1 &lt;&lt; bit);
+        }
+
+        Console.WriteLine("Numarul lipsa este: " + lipsa);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image11.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m7">Problema M6.5 :</b>
+Mere-Pere. Se consideră n camere distincte, situate una după alta, astfel încât din camera i
+(i∈{1, 2, ..., n-1}) se poate trece doar în camera i+1. În fiecare cameră se găsesc mere și pere în
+cantități cunoscute (bucăți).
+O persoană cu un rucsac suficient de încăpător, inițial gol, pornește din camera 1, trece prin camerele
+2, 3, ..., n și iese. La intrarea în fiecare cameră descarcă rucsacul, și încarcă, fie toate merele, fie toate
+perele din camera respectivă, după care trece în camera următoare. Se presupune că pentru fiecare fruct
+transportat între două camere, persoana consumă o calorie. Ce fel de fructe trebuie să încarce persoana
+în rucsac astfel încât după parcurgerea celor n camere să consume un număr minim de calorii și care
+este acest număr.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n, mere, pere, calorii = 0;
+
+        Console.Write("n = ");
+        n = int.Parse(Console.ReadLine());
+
+        for (int cam = 1; cam &lt;= n; cam++)
+        {
+            Console.Write("Mere in camera " + cam + " = ");
+            mere = int.Parse(Console.ReadLine());
+
+            Console.Write("Pere in camera " + cam + " = ");
+            pere = int.Parse(Console.ReadLine());
+
+            if (mere &lt; pere)
+            {
+                Console.WriteLine("Se incarca merele");
+                calorii = calorii + mere;
+            }
+            else
+            {
+                Console.WriteLine("Se incarca perele");
+                calorii = calorii + pere;
+            }
+        }
+
+        Console.WriteLine("Numarul minim de calorii este: " + calorii);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image4.png" alt="consola">
+        </div>
+
+        <div class="cuprins">
+            <pre class="text-ex1">
+<b style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m8">Problema M6.22 :</b>
+Suma în triunghi. Să considerăm un triunghi format din n linii (1&lt;n≤100), fiecare linie
+conținând numere întregi din domeniul [1,99], ca în exemplul următor:
+<img src="imagini/t1.jpg" alt="exemplu_triunghi" style="padding-top:20px;">
+Problema constă în scrierea unui program care să determine cea mai mare sumă de numere aflate pe un
+drum între numărul de pe prima linie și un număr de pe ultima linie. Fiecare număr din acest drum este
+situat sub precedentul, la stânga sau la dreapta acestuia.
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <b style="font-size: 25px; color:#344E41;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Implementarea în limbajul C# :</b>
+            <pre>
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n;
+        int[,] tr = new int[101, 101];
+        int[,] s = new int[101, 101];
+
+        Console.Write("n = ");
+        n = int.Parse(Console.ReadLine());
+
+        for (int lin = 1; lin &lt;= n; lin++)
+        {
+            string[] v = Console.ReadLine().Split(' ');
+            for (int col = 1; col &lt;= lin; col++)
+                tr[lin, col] = int.Parse(v[col - 1]);
+        }
+
+        s[1, 1] = tr[1, 1];
+
+        for (int lin = 2; lin &lt;= n; lin++)
+        {
+            for (int col = 1; col &lt;= lin; col++)
+            {
+                if (col == 1) s[lin, col] = s[lin - 1, col] + tr[lin, col];
+                else if (col == lin) s[lin, col] = s[lin - 1, col - 1] + tr[lin, col];
+                else s[lin, col] = Math.Max(s[lin - 1, col - 1], s[lin - 1, col]) + tr[lin, col];
+            }
+        }
+
+        int mx = s[n, 1];
+        for (int col = 2; col &lt;= n; col++)
+            if (s[n, col] &gt; mx) mx = s[n, col];
+
+        Console.WriteLine("Suma maxima = " + mx);
+    }
+}
+</pre>
+        </div>
+
+        <div class="cuprins">
+            <img style="width: 600px; padding-left: 150px;" src="imagini/image6.png" alt="consola">
+        </div>
+            
+<h1 class="titlu-mare2" id="individual">Sarcina Individuală</h1>
+<div class="cuprins">
+            <pre class="text-ex1">
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Analiza:</c>
+Se solicită elaborarea unui program în limbajul C#, prin intermediul căruia se vor prelucra datele despre profesorii unei platforme educaționale. 
+Platforma include două categorii principale: profesori și directori.
+Atât profesorii, cât și directorii pot avea una dintre următoarele specialități: șah, matematică sau limba engleză.Pentru fiecare profesor se cunosc următoarele informații:
+<ul style="line-height: 1.5px;">
+    <li>prenumele</li>
+    <li>numele</li>
+    <li>anul nașterii</li>
+    <li>patentă (daca are patenta se mărește salariul cu 30%)</li>
+    <li>numărul de ore predate</li>
+    <li>plata pentru o oră</li>
+</ul>
+În funcție de specialitate categoriile vor mai avea:
+
+<ol style="line-height: 1.5px;">
+    <li>Profesor de Șah</li>
+    <ul style="line-height: 2px;">
+        <li>tip lecție (Individual / Grup)</li>
+        <li>Dacă profesorul deține patentă, se vor introduce suplimentar: numărul de elevi din grup.</li>
+    </ul>
+    <li>Profesor de Matematică</li>
+    <ul style="line-height: 2px;">
+        <li>clasă predată</li>
+        <li>numărul de teste elaborate</li>
+    </ul>
+    <li>Profesor de Engleză</li>
+    <ul style="line-height:2px;">
+        <li>nivelul predat (A1, A2, B1, B2, C1, C2)</li>
+        <li>numărul de lecții conversaționale</li>
+    </ul>
+    <li>Director</li>
+    <ul style="line-height: 2px;">
+        <li>specialitatea: șah, matematică sau limba engleză</li>
+        <li>primește un adaos fix la salariu de 6000 lei.</li>
+    </ul>
+</ol>
+
+Programul va oferi posibilitatea de a gestiona datele profesorilor: introducerea datelor, afișarea profesorilor, 
+calcularea salariului, afișarea profesorilor după specialitate, căutarea unui profesor după nume, 
+afișarea profesorilor care dețin patentă, determinarea profesorului cu cel mai mare salariu și excluderea unui profesor din sistem.
+
+În cadrul programului au fost utilizate concepte ale programării orientate pe obiecte,
+precum clasele, obiectele, moștenirea, polimorfismul și suprascrierea metodelor.
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei CURS:</c>
+
+<pre class="cod-bloc1">
+class Curs
+{
+    public string Denumire;
+    public int Durata;
+
+    public void Citire()
+    {
+        Console.Write("Denumirea cursului: ");
+        Denumire = Console.ReadLine();
+
+        Console.Write("Durata cursului in luni: ");
+        Durata = int.Parse(Console.ReadLine());
+    }
+
+    public void Afisare()
+    {
+        Console.WriteLine("Curs: " + Denumire);
+        Console.WriteLine("Durata cursului: " + Durata + " luni");
+    }
+}
+</pre>
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PERSOANA:</c>
+
+<pre class="cod-bloc1">
+class Persoana
+{
+    public string Nume;
+    public string Prenume;
+    public DateTime DataNasterii;
+
+    public virtual void Citire()
+    {
+        Console.Write("Nume: ");
+        Nume = Console.ReadLine();
+
+        Console.Write("Prenume: ");
+        Prenume = Console.ReadLine();
+
+        Console.Write("Data nasterii (zz.ll.aaaa): ");
+        DataNasterii = DateTime.ParseExact(
+            Console.ReadLine(),
+            "dd.MM.yyyy",
+            CultureInfo.InvariantCulture
+        );
+    }
+
+    public virtual void Afisare()
+    {
+        Console.WriteLine("Nume: " + Nume);
+        Console.WriteLine("Prenume: " + Prenume);
+        Console.WriteLine("Data nasterii: " + DataNasterii.ToString("dd.MM.yyyy"));
+    }
+}
+
+</pre>
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei ELEV:</c>
+
+<pre class="cod-bloc1">
+class Elev
+{
+    public string Nume;
+    public string Prenume;
+
+    public void Citire()
+    {
+        Console.Write("Nume elev: ");
+        Nume = Console.ReadLine();
+
+        Console.Write("Prenume elev: ");
+        Prenume = Console.ReadLine();
+    }
+
+    public void Afisare()
+    {
+        Console.WriteLine(Nume + " " + Prenume);
+    }
+}
+</pre>
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PROFESOR:</c>
+
+<pre class="cod-bloc1">
+class Profesor : Persoana
+{
+    public int NrOre;
+    public double PlataOra;
+    public string Patenta;
+    public Curs CursPredat = new Curs();
+    public List<Elev> Elevi = new List<Elev>();
+
+    public override void Citire()
+    {
+        base.Citire();
+
+        Console.Write("Numar ore predate: ");
+        NrOre = int.Parse(Console.ReadLine());
+
+        Console.Write("Plata pentru o ora: ");
+        PlataOra = double.Parse(Console.ReadLine());
+
+        Console.Write("Detine patenta? (da/nu): ");
+        Patenta = Console.ReadLine();
+
+        Console.WriteLine("\nDate despre curs:");
+        CursPredat.Citire();
+
+        Console.Write("Cati elevi are profesorul? ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("\nElevul " + (i + 1) + ":");
+            Elev e = new Elev();
+            e.Citire();
+            Elevi.Add(e);
+        }
+    }
+
+    public virtual double CalculSalariu()
+    {
+        double salariu = NrOre * PlataOra;
+
+        if (Patenta.ToLower() == "da")
+            salariu = salariu * 1.30;
+
+        return salariu;
+    }
+
+    public override void Afisare()
+    {
+        base.Afisare();
+
+        Console.WriteLine("Numar ore: " + NrOre);
+        Console.WriteLine("Plata ora: " + PlataOra);
+        Console.WriteLine("Patenta: " + Patenta);
+
+        CursPredat.Afisare();
+
+        Console.WriteLine("Elevi:");
+        if (Elevi.Count == 0)
+            Console.WriteLine("Nu sunt elevi introdusi.");
+        else
+            for (int i = 0; i < Elevi.Count; i++)
+                Elevi[i].Afisare();
+
+        Console.WriteLine("Salariu: " + CalculSalariu() + " lei");
+    }
+
+    public virtual string Tip()
+    {
+        return "Profesor";
+    }
+}
+
+</pre>
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PROFESOR SAH:</c>
+
+<pre class="cod-bloc1">
+class ProfesorSah : Profesor
+{
+    public string TipLectie;
+    public int NrEleviPatenta;
+    public double PlataElev = 100;
+
+    public override void Citire()
+    {
+        base.Citire();
+
+        Console.Write("Tip lectie (individual/grup): ");
+        TipLectie = Console.ReadLine();
+
+        if (Patenta.ToLower() == "da")
+        {
+            Console.Write("Numar elevi pentru plata separata: ");
+            NrEleviPatenta = int.Parse(Console.ReadLine());
+        }
+    }
+
+    public override double CalculSalariu()
+    {
+        double salariu = NrOre * PlataOra;
+
+        if (Patenta.ToLower() == "da")
+            salariu = salariu * 1.30 + NrEleviPatenta * PlataElev;
+
+        return salariu;
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Profesor de Sah ---");
+        base.Afisare();
+
+        Console.WriteLine("Tip lectie: " + TipLectie);
+
+        if (Patenta.ToLower() == "da")
+            Console.WriteLine("Numar elevi pentru plata separata: " + NrEleviPatenta);
+    }
+
+    public override string Tip()
+    {
+        return "Sah";
+    }
+}
+</pre>
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PROFESOR MATEMATICA:</c>
+
+<pre class="cod-bloc1">
+class ProfesorMatematica : Profesor
+{
+    public string ClasaPredata;
+    public int NrTeste;
+
+    public override void Citire()
+    {
+        base.Citire();
+
+        Console.Write("Clasa predata: ");
+        ClasaPredata = Console.ReadLine();
+
+        Console.Write("Numar teste elaborate: ");
+        NrTeste = int.Parse(Console.ReadLine());
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Profesor de Matematica ---");
+        base.Afisare();
+
+        Console.WriteLine("Clasa predata: " + ClasaPredata);
+        Console.WriteLine("Numar teste elaborate: " + NrTeste);
+    }
+
+    public override string Tip()
+    {
+        return "Matematica";
+    }
+}
+</pre>
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PROFESOR ENGLEZA:</c>
+
+<pre class="cod-bloc1">
+class ProfesorEngleza : Profesor
+{
+    public string Nivel;
+    public int NrLectii;
+
+    public override void Citire()
+    {
+        base.Citire();
+
+        Console.Write("Nivel predat: ");
+        Nivel = Console.ReadLine();
+
+        Console.Write("Numar lectii conversationale: ");
+        NrLectii = int.Parse(Console.ReadLine());
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Profesor de Engleza ---");
+        base.Afisare();
+
+        Console.WriteLine("Nivel predat: " + Nivel);
+        Console.WriteLine("Numar lectii conversationale: " + NrLectii);
+    }
+
+    public override string Tip()
+    {
+        return "Engleza";
+    }
+}
+
+</pre>
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura claselor DIRECTOR (LA DIFERITE SPECIALITĂȚI):</c>
+
+<pre class="cod-bloc1">
+class DirectorSah : ProfesorSah
+{
+    public override double CalculSalariu()
+    {
+        return base.CalculSalariu() + 6000;
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Director cu specialitatea Sah ---");
+        base.Afisare();
+        Console.WriteLine("Adaos director: 6000 lei");
+    }
+
+    public override string Tip()
+    {
+        return "Director Sah";
+    }
+}
+
+class DirectorMatematica : ProfesorMatematica
+{
+    public override double CalculSalariu()
+    {
+        return base.CalculSalariu() + 6000;
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Director cu specialitatea Matematica ---");
+        base.Afisare();
+        Console.WriteLine("Adaos director: 6000 lei");
+    }
+
+    public override string Tip()
+    {
+        return "Director Matematica";
+    }
+}
+
+class DirectorEngleza : ProfesorEngleza
+{
+    public override double CalculSalariu()
+    {
+        return base.CalculSalariu() + 6000;
+    }
+
+    public override void Afisare()
+    {
+        Console.WriteLine("\n--- Director cu specialitatea Engleza ---");
+        base.Afisare();
+        Console.WriteLine("Adaos director: 6000 lei");
+    }
+
+    public override string Tip()
+    {
+        return "Director Engleza";
+    }
+}
+
+</pre>
+
+<c style="font-size: 25px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="m6">Structura clasei PROGRAM:</c>
+
+<pre class="cod-bloc1">
+class Program
+{
+    static void Main()
+    {
+        List<Profesor> profesori = new List<Profesor>();
+        int optiune;
+
+        do
+        {
+            Console.WriteLine("1. Adauga persoana");
+            Console.WriteLine("2. Afiseaza toti profesorii/directorii");
+            Console.WriteLine("3. Afiseaza persoanele cu patenta");
+            Console.WriteLine("4. Cauta dupa nume");
+            Console.WriteLine("5. Persoana cu salariul maxim");
+            Console.WriteLine("6. Sterge dupa nume");
+            Console.WriteLine("0. Iesire");
+            Console.Write("Alege optiunea: ");
+            optiune = int.Parse(Console.ReadLine());
+
+            if (optiune == 1)
+            {
+                Console.WriteLine("\nAlege categoria:");
+                Console.WriteLine("1. Profesor");
+                Console.WriteLine("2. Director");
+                Console.Write("Categoria: ");
+
+                int categorie = int.Parse(Console.ReadLine());
+                Profesor p = null;
+
+                if (categorie == 1)
+                {
+                    Console.WriteLine("\nAlege specialitatea profesorului:");
+                    Console.WriteLine("1. Sah");
+                    Console.WriteLine("2. Matematica");
+                    Console.WriteLine("3. Engleza");
+                    Console.Write("Specialitatea: ");
+
+                    int specialitate = int.Parse(Console.ReadLine());
+
+                    if (specialitate == 1)
+                        p = new ProfesorSah();
+                    else if (specialitate == 2)
+                        p = new ProfesorMatematica();
+                    else if (specialitate == 3)
+                        p = new ProfesorEngleza();
+                }
+                else if (categorie == 2)
+                {
+                    Console.WriteLine("\nAlege specialitatea directorului:");
+                    Console.WriteLine("1. Sah");
+                    Console.WriteLine("2. Matematica");
+                    Console.WriteLine("3. Engleza");
+                    Console.Write("Specialitatea: ");
+
+                    int specialitate = int.Parse(Console.ReadLine());
+
+                    if (specialitate == 1)
+                        p = new DirectorSah();
+                    else if (specialitate == 2)
+                        p = new DirectorMatematica();
+                    else if (specialitate == 3)
+                        p = new DirectorEngleza();
+                }
+
+                if (p != null)
+                {
+                    p.Citire();
+                    profesori.Add(p);
+                    Console.WriteLine("Persoana adaugata.");
+                }
+                else
+                {
+                    Console.WriteLine("Optiune invalida.");
+                }
+            }
+            else if (optiune == 2)
+            {
+                for (int i = 0; i < profesori.Count; i++)
+                    profesori[i].Afisare();
+            }
+            else if (optiune == 3)
+            {
+                for (int i = 0; i < profesori.Count; i++)
+                    if (profesori[i].Patenta.ToLower() == "da")
+                        profesori[i].Afisare();
+            }
+            else if (optiune == 4)
+            {
+                Console.Write("Introdu numele cautat: ");
+                string nume = Console.ReadLine();
+
+                for (int i = 0; i < profesori.Count; i++)
+                    if (profesori[i].Nume.ToLower() == nume.ToLower())
+                        profesori[i].Afisare();
+            }
+            else if (optiune == 5)
+            {
+                if (profesori.Count > 0)
+                {
+                    Profesor max = profesori[0];
+
+                    for (int i = 1; i < profesori.Count; i++)
+                        if (profesori[i].CalculSalariu() > max.CalculSalariu())
+                            max = profesori[i];
+
+                    Console.WriteLine("\nPersoana cu salariul maxim:");
+                    max.Afisare();
+                }
+                else
+                {
+                    Console.WriteLine("Nu exista persoane introduse.");
+                }
+            }
+            else if (optiune == 6)
+            {
+                Console.Write("Introdu numele persoanei de sters: ");
+                string nume = Console.ReadLine();
+
+                int sters = 0;
+
+                for (int i = 0; i < profesori.Count; i++)
+                {
+                    if (profesori[i].Nume.ToLower() == nume.ToLower())
+                    {
+                        profesori.RemoveAt(i);
+                        Console.WriteLine("Persoana stearsa.");
+                        sters = 1;
+                        break;
+                    }
+                }
+
+                if (sters == 0)
+                    Console.WriteLine("Persoana nu a fost gasita.");
+            }
+
+        } while (optiune != 0);
+    }
+}
+</pre>
+</pre>
+        </div>
+<a href="https://canva.link/ocvxjkfrqoi4a8r" class="titlu-mare4">Apasă dacă vrei sa vezi relațiile dintre clase</a>
+    </div>
+
+    <footer>
+        <p>@2026 Gabriela Carpovici. Toate drepturile rezervate.</p>
+    </footer>
+
+</body>
+
+</html>
